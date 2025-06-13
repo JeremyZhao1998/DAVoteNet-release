@@ -14,6 +14,11 @@ We provide unified format of existing indoor 3D object detection datasets **Scan
 as well as our newly proposed large-scale datasets **ProcTHOR-OD** and **ProcFront**.
 Different datasets exhibit different distribution of style, point cloud quality, layout and instance features.
 
+We provide the unified format of these datasets in the following figures, including **the same density**(20,000 points per scene),
+**the unified coordinates**(xyz coordinate axis in the figures).
+
+### Existing Datasets
+
 **ScanNet**
 
 <table>
@@ -46,6 +51,15 @@ Different datasets exhibit different distribution of style, point cloud quality,
     <td><img src="figures/3dfront/04.png" width="100%"></td>
   </tr>
 </table>
+
+
+### Our proposed Datasets
+
+We open source the generation code of our proposed ProcTHOR-OD and ProcFront dataset at:
+
+[ProcTHOR-OD](https://github.com/JeremyZhao1998/ProcTHOR-OD)
+
+This repository provides the code of generating the ProcTHOR-OD layouts and the method to export 3D mesh files.
 
 **ProcTHOR-OD**
 
