@@ -14,19 +14,16 @@ We provide unified format of existing indoor 3D object detection datasets **Scan
 as well as our newly proposed large-scale datasets **ProcTHOR-OD** and **ProcFront**.
 Different datasets exhibit different distribution of style, point cloud quality, layout and instance features.
 
-We provide the unified format of these datasets in the following figures, including **the same density**(20,000 points per scene),
-**the unified coordinates**(xyz coordinate axis in the figures).
-
 ### Existing Datasets
 
 **ScanNet**
 
 <table>
   <tr>
-    <td><img src="figures/scannet/01.png" width="100%"></td>
-    <td><img src="figures/scannet/02.png" width="100%"></td>
-    <td><img src="figures/scannet/03.png" width="100%"></td>
-    <td><img src="figures/scannet/04.png" width="100%"></td>
+    <td><img src="figures/scannet/01.gif" width="100%"></td>
+    <td><img src="figures/scannet/02.gif" width="100%"></td>
+    <td><img src="figures/scannet/03.gif" width="100%"></td>
+    <td><img src="figures/scannet/04.gif" width="100%"></td>
   </tr>
 </table>
 
@@ -34,10 +31,10 @@ We provide the unified format of these datasets in the following figures, includ
 
 <table>
   <tr>
-    <td><img src="figures/sunrgbd/01.png" width="100%"></td>
-    <td><img src="figures/sunrgbd/02.png" width="100%"></td>
-    <td><img src="figures/sunrgbd/03.png" width="100%"></td>
-    <td><img src="figures/sunrgbd/04.png" width="100%"></td>
+    <td><img src="figures/sunrgbd/01.gif" width="100%"></td>
+    <td><img src="figures/sunrgbd/02.gif" width="100%"></td>
+    <td><img src="figures/sunrgbd/03.gif" width="100%"></td>
+    <td><img src="figures/sunrgbd/04.gif" width="100%"></td>
   </tr>
 </table>
 
@@ -45,10 +42,10 @@ We provide the unified format of these datasets in the following figures, includ
 
 <table>
   <tr>
-    <td><img src="figures/3dfront/01.png" width="100%"></td>
-    <td><img src="figures/3dfront/02.png" width="100%"></td>
-    <td><img src="figures/3dfront/03.png" width="100%"></td>
-    <td><img src="figures/3dfront/04.png" width="100%"></td>
+    <td><img src="figures/3dfront/01.gif" width="100%"></td>
+    <td><img src="figures/3dfront/02.gif" width="100%"></td>
+    <td><img src="figures/3dfront/03.gif" width="100%"></td>
+    <td><img src="figures/3dfront/04.gif" width="100%"></td>
   </tr>
 </table>
 
@@ -65,10 +62,10 @@ This repository provides the code of generating the ProcTHOR-OD layouts and the 
 
 <table>
   <tr>
-    <td><img src="figures/procthor/01.png" width="100%"></td>
-    <td><img src="figures/procthor/02.png" width="100%"></td>
-    <td><img src="figures/procthor/03.png" width="100%"></td>
-    <td><img src="figures/procthor/04.png" width="100%"></td>
+    <td><img src="figures/procthor/01.gif" width="100%"></td>
+    <td><img src="figures/procthor/02.gif" width="100%"></td>
+    <td><img src="figures/procthor/03.gif" width="100%"></td>
+    <td><img src="figures/procthor/04.gif" width="100%"></td>
   </tr>
 </table>
 
@@ -76,9 +73,9 @@ This repository provides the code of generating the ProcTHOR-OD layouts and the 
 
 <table>
   <tr>
-    <td><img src="figures/procfront/01.png" width="100%"></td>
-    <td><img src="figures/procfront/02.png" width="100%"></td>
-    <td><img src="figures/procfront/03.png" width="100%"></td>
-    <td><img src="figures/procfront/04.png" width="100%"></td>
+    <td><img src="figures/procfront/01.gif" width="100%"></td>
+    <td><img src="figures/procfront/02.gif" width="100%"></td>
+    <td><img src="figures/procfront/03.gif" width="100%"></td>
+    <td><img src="figures/procfront/04.gif" width="100%"></td>
   </tr>
 </table>
