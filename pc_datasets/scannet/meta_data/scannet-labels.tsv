@@ -1,0 +1,530 @@
+raw_category	new_category
+chair	chair
+books	book
+door	door
+object	object
+window	window
+table	table
+trash can	garbage_can
+pillow	pillow
+picture	picture
+doorframe	door
+box	box
+cabinet	cabinet
+monitor	monitor
+desk	desk
+office chair	chair
+shelf	shelf
+towel	towel
+couch	sofa
+sink	sink
+lamp	lamp
+backpack	bag
+bed	bed
+curtain	curtain
+bookshelf	bookshelf
+plant	plant
+mirror	mirror
+radiator	radiator
+whiteboard	board
+kitchen cabinet	cabinet
+toilet paper	paper
+kitchen cabinets	cabinet
+clothes	clothes
+coffee table	table
+armchair	chair
+book	book
+toilet	toilet
+stool	chair
+bag	bag
+bottle	bottle
+keyboard	keyboard
+shoes	shoe
+nightstand	night_stand
+recycling bin	garbage_can
+tv	tv
+dresser	dresser
+file cabinet	cabinet
+computer tower	box
+clothing	clothes
+telephone	phone
+cup	cup
+end table	table
+jacket	clothes
+microwave	microwave
+refrigerator	fridge
+shower curtain	shower_curtain
+kitchen counter	counter
+bathtub	bathtub
+sofa chair	chair
+paper towel dispenser	dispenser
+bathroom vanity	cabinet
+suitcase	box
+ottoman	chair
+laptop	computer
+light	lamp
+counter	counter
+printer	printer
+board	board
+stove	stove
+soap dispenser	dispenser
+mini fridge	fridge
+doors	door
+cabinets	cabinet
+fan	fan
+bathroom stall	bathroom_stall
+bar	bar
+laundry hamper	basket
+blanket	blanket
+coffee maker	coffee_maker
+copier	printer
+light switch	switch
+tv stand	tv_stand
+decoration	decor
+bathroom stall door	door
+tissue box	box
+bench	chair
+storage bin	bin
+range hood	range hood
+dumbbell	dumbbell
+blackboard	board
+bulletin board	board
+wardrobe closet	wardrobe
+basket	basket
+ceiling light	light
+soap dish	dish
+shower	shower
+mouse	mouse
+speaker	speaker
+seat	chair
+person	person
+storage container	box
+ball	ball
+trash bin	garbage_can
+closet	wardrobe
+clock	clock
+shower curtain rod	rod
+ledge	ledge
+sign	sign
+purse	purse
+bathroom cabinet	cabinet
+paper bag	bag
+stairs	strairs
+bicycle	bicycle
+dishwasher	dishwasher
+container	box
+bucket	basket
+mat	blanket
+paper	paper
+tube	tube
+dish rack	shelf
+windowsill	ledge
+stack of chairs	chair
+closet doors	door
+laundry basket	basket
+paper towel roll	roll
+plunger	plunger
+stair rail	rail
+closet door	door
+handicap bar	bar
+guitar	guitar
+rail	rail
+fire extinguisher	fire_extinguisher
+cd case	box
+paper cutter	cutter
+column	column
+cart	cart
+blinds	blinds
+closet rod	rod
+water cooler	fridge
+guitar case	guitar_case
+scale	scale
+piano	piano
+stand	table
+boxes	box
+tray	plate
+pipe	tube
+bin	bin
+water pitcher	pitcher
+ladder	ladder
+papers	paper
+vacuum cleaner	vacuum_cleaner
+hat	hat
+hair dryer	hair_dryer
+structure	structure
+mailboxes	box
+bathroom counter	counter
+plate	plate
+broom	broom
+toilet paper dispenser	dispenser
+wardrobe cabinet	wardrobe
+bowl	bowl
+washing machine	machine
+bookshelves	bookshelf
+shoe	shoe
+rack	shelf
+dining table	table
+alarm clock	clock
+shower door	door
+oven	oven
+toilet seat cover dispenser	dispenser
+clothes dryer	clothes_dryer
+pillar	column
+music stand	table
+coffee kettle	bottle
+storage organizer	organizer
+toaster	toaster
+coat rack	shelf
+fire alarm	clock
+divider	divider
+laundry detergent	laundry_detergent
+power strip	power_strip
+candle	candle
+staircase	strairs
+machine	machine
+luggage	box
+furniture	furniture
+lamp base	lamp_base
+potted plant	plant
+projector	projector
+globe	globe
+footstool	chair
+power outlet	outlet
+foosball table	table
+folded chair	chair
+stuffed animal	animal
+water bottle	bottle
+keyboard piano	piano
+dustpan	pan
+carpet	blanket
+poster tube	tube
+calendar	calendar
+case	box
+toilet paper holder	
+pillows	pillow
+swiffer	
+whiteboard eraser	
+soap	
+flip flops	
+step stool	chair
+hamper	basket
+round table	table
+projector screen	monitor
+cloth	clothes
+vent	
+ironing board	board
+toaster oven	oven
+block	clock
+drawer	cabinet
+piano bench	chair
+fireplace	
+shorts	
+shower head	
+exercise machine	machine
+thermostat	
+water fountain	
+vase	
+footrest	
+hand rail	
+ceiling fan	fan
+crate	
+rod	rod
+tire	
+breakfast bar	
+cutting board	board
+couch cushions	
+thermos	bottle
+washing machines	machine
+teddy bear	
+headphones	headphone
+tripod	
+jar	
+shirt	
+bathrobe	
+pipes	tube
+poster	picture
+remote	remote control
+toothbrush	
+loft bed	bed
+coat	
+toilet brush	
+heater	
+toilet paper rolls	
+rug	
+treadmill	
+step	
+mirror doors	door
+curtains	curtain
+stair	stairs
+soap bottle	
+hoverboard	board
+metronome	
+tupperware	
+music book	book
+dart board	board
+hanging	
+cushion	
+compost bin	
+painting	picture
+mail	
+elliptical machine	machine
+kettle	
+smoke detector	
+pool table	table
+wall hanging	
+binders	
+spray bottle	bottle
+flowerpot	
+sewing machine	machine
+nerf gun	
+case of water bottles	bottle
+dumbell	
+quadcopter	
+ikea bag	
+cooking pot	
+scanner	
+shoe rack	
+chest	
+bananas	
+handrail	
+carseat	
+hand dryer	
+shampoo bottle	bottle
+podium	
+controller	
+railing	
+pot	
+dolly	
+vending machine	
+duffel bag	
+clothes hanger	
+kitchen island	table
+stapler	
+storage box	box
+oven mitt	
+coffee box	box
+umbrella	
+tennis racket	
+hair brush	
+mouthwash bottle	bottle
+cabinet door	door
+shampoo	
+screen	monitor
+studio light	
+hose	
+futon	
+sponge	
+shredder	
+mug	
+slippers	
+rice cooker	
+cardboard	
+toothpaste	
+shaving cream	
+paper tray	plate
+blackboard eraser	
+exit sign	
+crutches	
+organizer	
+magazine	
+flag	
+shower control valve	
+towels	
+boxes of paper	paper
+banner	
+messenger bag	
+changing station	
+bike pump	
+grocery bag	bag
+laundry bag	bag
+wall lamp	lamp
+bear	
+plastic bin	
+rope	
+folded table	table
+helmet	
+pictures	picture
+pizza box	box
+iron	
+boiler	
+car	
+pitcher	
+soap bar	
+envelope	
+doll	
+folded ladder	
+cabinet doors	
+trunk	
+table lamp	
+humidifier	
+food container	
+golf bag	
+stack of cups	cup
+grab bar	
+frame	
+exercise ball	
+lotion bottle	bottle
+film light	
+star	
+cups	
+desk lamp	lamp
+xbox controller	
+salt	
+coffee bean bag	bag
+dishwashing soap bottle	
+soda stream	
+beer bottles	
+carton	
+card	
+frying pan	
+sock	
+pants	
+can	bottle
+toilet paper package	
+plastic storage bin	
+conditioner bottle	
+easel	
+statue	
+tea kettle	
+instrument case	
+barricade	
+dispenser	dispenser
+plastic container	
+sliding wood door	
+folded chairs	chair
+clothes dryers	
+food display	
+elevator	
+faucet	
+hand towel	
+bottles	
+toiletry	
+briefcase	
+massage chair	
+luggage rack	
+ping pong table	table
+headboard	
+lunch box	
+boat	
+dumbbell plates	
+urinal	toilet
+platform	
+cap	
+paper organizer	
+display rack	
+garage door	
+mattress	bed
+jewelry box	
+santa	
+ping pong paddle	
+wall mounted coat rack	
+beanbag chair	
+map	
+wheel	
+garbage bag	bag
+workbench	
+trash bag	bag
+bath products	
+ipad	
+side table	night_stand
+mop	
+switch	
+suitcases	
+cover	
+kinect	
+cooking pan	
+bycicle	
+subwoofer	
+clip	
+drum set	
+slipper	
+toy dinosaur	
+soda can	
+traffic cone	
+battery disposal jar	
+photo	
+storage shelf	
+cd cases	
+exercise bike	
+contact lens solution bottle	
+clothing rack	
+display case	
+paper towel	
+lotion	
+buddha	
+sofa bed	bed
+alarm	
+barrier	
+fire sprinkler	
+notepad	
+stack of folded chairs	
+mail tray	
+file organizer	
+mail trays	
+food bag	
+pantry shelf	
+shopping bag	
+shower doors	door
+socks	
+sweater	
+airplane	
+flower stand	
+stools	
+loofa	
+curtain rod	rod
+stepstool	
+paper shredder	
+chandelier	
+folder	
+trash cabinet	cabinet
+mail bin	
+tap	
+cable	
+fish	
+coffee mug	
+binder	
+trolley	
+fire hose	
+hand sanitzer dispenser	
+beachball	
+banister	
+paper towel rolls	
+boots	
+tank	
+media center	cabinet
+washcloth	
+teapot	
+air hockey table	
+electric panel	
+wet floor sign	
+wig	
+pen holder	
+closet shelf	wardrobe
+dress rack	
+bunk bed	
+sofa	
+centerpiece	
+coatrack	
+toolbox	
+covered box	
+telescope	
+rocking chair	
+toy piano	
+night light	
+stovetop	
+canopy	
+glass	
+cone	
+magazine rack	
+elevator button	
+rolled poster	
+costume	
+file cabinets	
+cat litter box	
+stacks of cups	
+plates	plate
+display	
+pizza boxes	
+stepladder	
+baseball cap	
+postcard	

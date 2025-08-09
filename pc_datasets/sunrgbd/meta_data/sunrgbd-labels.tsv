@@ -1,0 +1,620 @@
+raw_category	new_category
+chair	chair
+table	table
+pillow	pillow
+sofa_chair	chair
+desk	desk
+bed	bed
+sofa	sofa
+computer	computer
+lamp	lamp
+box	box
+garbage_bin	garbage_can
+cabinet	cabinet
+shelf	shelf
+drawer	cabinet
+night_stand	night_stand
+endtable	table
+sink	sink
+picture	picture
+stool	chair
+coffee_table	table
+bookshelf	bookshelf
+painting	picture
+keyboard	keyboard
+dresser	dresser
+tv	tv
+whiteboard	board
+cpu	cpu
+toilet	toilet
+paper	paper
+ottoman	chair
+bench	chair
+recycle_bin	garbage_can
+monitor	monitor
+printer	printer
+plant	plant
+door	door
+book	book
+mirror	mirror
+laptop	computer
+towel	towel
+curtain	curtain
+books	book
+back_pack	bag
+cup	cup
+fridge	fridge
+counter	counter
+bottle	bottle
+bathtub	bathtub
+cubby	cubby
+microwave	microwave
+mouse	mouse
+rack	shelf
+tray	plate
+mug	cup
+bag	bag
+projector	projector
+person	person
+suits_case	box
+telephone	phone
+stove	stove
+cart	cart
+poster	picture
+podium	table
+plate	plate
+dresser_mirror	mirror
+speaker	speaker
+outlet	outlet
+scanner	scanner
+blinds	blinds
+bowl	bowl
+blackboard	board
+island	table
+tv_stand	tv_stand
+organizer	organizer
+stack_of_chairs	chair
+dining_table	table
+futon	futon
+blanket	blanket
+glass	glass
+vase	vase
+toilet_paper	paper
+bulletin_board	board
+clock	clock
+basket	basket
+thermos	bottle
+switch	switch
+stand	tv_stand
+urinal	toilet
+container	box
+soap_dispenser	dispenser
+flower_vase	vase
+crib	cirb
+pen	pen
+fire_extinguisher	fire_extinguisher
+wire_container	box
+flowers	plant
+tissue	paper
+projector_screen	monitor
+toys	toys
+bunk_bed	bed
+coffee_maker	coffee_maker
+paper_towel_dispenser	dispenser
+clothing_rack	wardrobe
+laptop_case	box
+stapler	stapler
+mattress	bed
+nightstand	night_stand
+kettle	kettle
+air_conditioner	air_conditioner
+notebook	book
+can	bottle
+pot	pot
+cupboard	cabinet
+water_fountain	water_fountain
+water_dispenser	dispenser
+toaster_oven	oven
+newspaper	paper
+toy	toys
+armoire	wardrobe
+laundry_basket	basket
+paper_bag	bag
+decor	decor
+light	light
+eraser	eraser
+bicycle	bicycle
+binder	binder
+plants	plant
+kakejiku	kakejiku
+stuffed_toy	toys
+dish_detergent	dish_detergent
+shampoo	bottle
+electric_fan	fan
+toilet_paper_dispenser	dispenser
+window	window
+parcel	box
+paperbag	bag
+oven	oven
+water_bottle	bottle
+marker	marker
+phone	phone
+plastic_bag	bag
+diploma	paper
+fan	fan
+piano	piano
+machine	machine
+board	board
+side_table	night_stand
+pizza_box	box
+dishwasher	dishwasher
+carpet	blanket
+headphones	headphones
+remote	remote_control
+soap_dish	dish
+shoes	shoes
+hamper	hamper
+drying_rack	shelf
+bulletin	paper
+magazine	book
+remote_control	remote_control
+document_holder	document_holder
+tupperware	
+map	
+cups	cup
+battery	
+washing_machine	machine
+fire_place	
+light_fixture	
+paper_ream	paper
+faucet	
+tree	plant
+figurine	
+camera	
+alarm	clock
+chairs	chair
+desktop	
+cartoon	
+ladder	
+bucket	
+coffeemaker	coffee_maker
+globe	
+shower_curtain	shower_curtain
+player	monitor
+end_table	table
+chest	
+espresso_machine	machine
+toaster	
+extension_wire	
+brick	
+dispenser	dispenser
+banner	
+headboard	board
+sofa_bed	bed
+bags	bag
+fume_hood	
+bulletinboard	board
+lotion	
+toasteroven	
+tissuebox	box
+jar	
+chandelier	
+dryer	
+coffee_cup	cup
+information_board	board
+cpu_case	box
+rice_cooker	
+hole_puncher	
+power_strip	
+bust	
+pitcher	
+wine_bottle	bottle
+wire	
+wood	
+piano_bench	chair
+booth	
+art	
+divider	
+plastic	
+water_jug	
+frying_pan	
+airconditioner	
+dvdplayer	
+bookstand	table
+placemat	
+mouse_pad	
+hand_dryer	machine
+headset	
+decoration	decor
+rug	
+washer	
+jug	
+toiletries	
+stepstool	
+dish_soap	
+heater	
+package	
+baby_stroller	
+foosball_table	
+blender	
+trolley	
+seat	
+massage_chair	
+high_chair	
+sign	
+baby_chair	
+calendar	
+chalkboard	
+sound_system	
+cashregister	
+lunchbox	
+guitar	
+laundrybasket	
+soap	
+pan	
+pictures	picture
+tape	
+wipes	
+cd_player	
+hand_sanitizer_dispenser	
+soccer_table	
+coat_rack	
+sheet	
+display	
+toolbox	
+snacks	
+styrofoam	
+messenger_bag	
+ashtray	
+dish_tray	
+balloon	
+spray	
+fax	
+closet	wardrobe
+screen	
+changing_table	
+hanger	
+plug	
+coat	
+portrait	
+computerrack	
+candle	
+glasses	
+drum	
+stroller	
+typewriter	
+easel	
+flowerbase	
+toyhouse	
+waterdispenser	
+pingpongtable	
+showercurtain	shower_curtain
+scale	
+toiletpaper	
+condiments	
+knives	
+venetianblinds	
+pencil	
+sunglasses	
+bin	
+photo	
+tape_dispenser	
+paper_cutter	
+aluminum_tray	
+game_console	
+decorations	
+christmas_tree	
+toothpaste	
+hose	
+cell_phone	
+hairdryer	
+safe	
+tool	
+chessset	
+cushion	
+brush	
+router	
+trophy	
+lockers	
+banana	
+flower_pot	
+mousepad	
+saucer	
+billboard	
+vacuum_cleaner	
+hat	
+table_tennis	
+portable_stove	
+canister	
+token_machine	
+umbrella	
+magazines	
+bookcase	bookshelf
+platform	
+sheets	
+file	
+kitchen_sink	sink
+chimney	
+utensil	
+lawn_chair	
+scissor	
+kitchen	
+cassette	
+puncher	
+spicerack	
+spoonholder	
+ricecooker	
+video	
+jersey	
+remotecontrol	
+couch	
+centertable	
+roller	
+dishdetergent	
+stair	
+files	
+unknown	
+bathmat	
+fruit_rack	
+fumehood	
+choppingboard	
+dogplate	
+rocking_chair	
+flag	
+iron	
+ironingboard	
+radio	
+walldecor	
+partition	
+charger	
+helmet	
+page	
+spoon	
+card	
+medicine	
+bottles	
+fire_alarm	
+computer_mouse	
+paper_cup	
+table_napkin	
+stirrer	
+pumpkin	
+napkin	
+fruit	
+doll	
+slipper	
+dumbbell	
+dustpan	
+cooking_pot	
+wreath	
+pot_holder	
+food	
+bed_sheet	
+oven_mitt	
+shower	shower
+kerosene	
+ceiling_fan	
+sweater	
+luggage	
+razor	
+pail	
+pile_of_boxes	
+cereal	
+noodles	
+vault	
+soundsystem	
+footrest	
+milk	
+chopping_board	
+kiosk_machine	
+statue	
+go_cart	
+magazine_stand	
+microphone_stand	
+music_stand	tv_stand
+shoe	
+floor_outlet	
+table_organizer	
+paper_weight	
+frige	
+modem	
+weekender	
+robot	
+shopping_tray	
+sponge	
+propane_tank	
+flat_screen_tv	
+push_button	
+pipe	
+adaptor	
+mineral_bottle	
+wall_decor	
+jacket	
+saucers	
+pedestal	
+power_supply	
+hammer	
+poster_printer	
+compressor	
+cellphone	
+storage_box	
+stairmaster	
+microscope	
+mailboxes	
+shelving_cart	
+ice_bucket	
+mini_bar	
+vanity_table	cabinet
+magazine_boxes	
+wire_cart	
+linens	
+clothes_rack	wardrobe
+dress	
+dislay	
+bulb	
+greeting_card	
+display_stand	tv_stand
+man	
+hair	
+boat	
+leaves	
+credenza	
+cooking_pan	
+utensil_stand	
+shopping_cart	
+locker	
+display_rack	
+standboard	
+wallclock	
+emergencylight	
+pictureframe	picture
+displaycase	
+cap	
+hingedoor	
+pushcart	
+sweatshirt	
+oil	
+grillbar	
+gasrange	
+knife	
+mineralwater	
+paperwrap	
+glassjar	
+mixer	
+folders	
+envelope	
+toycase	
+art_board	
+telescope	
+skate	
+trampoline	
+papercutter	
+pocketbook	
+addingmachine	
+cdplayer	
+chargingstation	
+stereo	
+soapdispenser	
+blower	
+bathroom	
+canlde_stand	
+showerroom	
+fruitstand	
+doormat	
+dryingrack	
+electricstove	
+ham	
+potato	
+frames	
+bagpack	
+safetyhat	
+television	
+drawers	
+candelabrum	
+webcam	
+key_board	
+tripod	
+markers	
+note	
+handbag	
+information_sheet	
+boombox	
+clip_board	
+ipod	
+surge_protector	
+knife_organizer	
+dishwashing_liquid	
+poster_paper	
+equalizer	
+socket	
+game_controller	
+remote_conrol	
+comupter	
+plate_holder	
+ball	
+toy_car	
+coat_hanger	
+scotch_tape	
+paper_plate	
+exit_sign	
+venetian_blinds	
+soda	
+hand_sanitizer	
+display_case	
+plaque	
+manual	
+lamination_machine	
+laminator_machine	
+urinal_bowl	
+toilet_seat_cover_dispenser	
+floor_sign	
+fork	
+cook-top	
+pad	
+mop	
+cream	
+sweep	
+laundry_rack	
+wallet	
+broom	
+chocolate_box	
+laptop_cover	
+water_filter	
+scarf	
+scissors	
+airpot	
+wine_glass	
+water_bottle_pack	
+shoe_box	
+skillet	
+dvd_player	
+burner	
+toilet_paper_holder	
+grapes	
+oranges	
+fuse_box	
+carved_display	
+floral_display	
+mobile_phone	
+wristwatch	
+toothbrush	
+shower_hose	
+shower_nozzle	
+dopp_kit	
+soap_holder	
+toilet_brush	
+toothbrush_kit	
+deodorant	
+slippers	
+gym_bag	
+plunger	
+luggage_stool	
+hangers	
+assorted_boxes	
+box_with_items	
+sealer	
+machine_stand	tv_stand
+tank	
+gloves	
+mask	
+apron	
+flashlight	
+long_office_table	
+bar_table	
+curtain_blinds	
+lego	
+cup_with_pens	
+chair_thumb	
+child_chair	
+slab	
+washcorner	
+avr	
+microwave_oven	
+packaging_materials	
+plastic_bin	
+vending_machine	
+printer_tray	
+magazine_rack	
+clear_book	
+vacuum	
+tool_box	
