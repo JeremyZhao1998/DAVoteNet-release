@@ -11,7 +11,7 @@ from pc_datasets import PCDetectionDataset
 from models.votenet import VoteNet
 from models.votenet_criterion import VoteNetCriterion
 from models.evaluator import Evaluator
-from engine import train_one_epoch, teach_one_epoch, evaluate
+from engine import train_one_epoch, calculate_rv_info, teach_one_epoch, evaluate
 from utils.distributed_utils import init_distributed_mode, get_rank
 
 
@@ -20,11 +20,11 @@ def parse_args():
     # Mode
     parser.add_argument('--mode', default='source_only')
     # Dataset configuration
-    parser.add_argument('--data_root', default='<data_root>', help='Data root')
-    parser.add_argument('--src_dataset', default='scannet', help='Dataset name')
-    parser.add_argument('--tgt_dataset', default='sunrgbd', help='Dataset name')
-    parser.add_argument('--num_points_preload', type=int, default=100000, help='Preload point Number')
-    parser.add_argument('--num_points', type=int, default=40000, help='Point Number')
+    parser.add_argument('--data_root', default='<your_data_root>', help='Data root')
+    parser.add_argument('--src_dataset', default='<source_dataset>', help='Dataset name')
+    parser.add_argument('--tgt_dataset', default='<target_dataset>', help='Dataset name')
+    parser.add_argument('--num_points_preload', type=int, default=200000, help='Preload point Number')
+    parser.add_argument('--num_points', type=int, default=200000, help='Point Number')
     parser.add_argument('--categories', nargs='+', type=str,
                         default=['bed', 'bookshelf', 'cabinet', 'chair', 'desk', 'garbage_can', 'lamp', 'night_stand',
                                  'shelf', 'sink', 'sofa', 'table', 'toilet', 'tv', 'others'], help='Categories')
@@ -32,6 +32,7 @@ def parse_args():
     parser.add_argument('--max_num_obj', type=int, default=64, help='Max number of objects')
     parser.add_argument('--axis_aligned', type=int, default=1, help='Use axis aligned bounding boxes')
     parser.add_argument('--few_shot', type=int, default=-1, help='Few shot fine-tuning')
+    parser.add_argument('--mean_size_prior', type=int, default=0, help='Use target mean size prior')
     # Model configuration
     parser.add_argument('--model', default='votenet', help='Model name')
     parser.add_argument('--backbone', default='pointnet2', help='Backbone name')
@@ -56,9 +57,10 @@ def parse_args():
     # Teaching configuration
     parser.add_argument('--obj_threshold', type=float, default=0.95, help='Objectness threshold for pseudo labels')
     parser.add_argument('--sem_threshold', type=float, default=0.95, help='Semantic threshold for pseudo labels')
-    parser.add_argument('--alpha_ema', type=float, default=0.9996, help='Exponential moving average weight')
+    parser.add_argument('--alpha_ema', type=float, default=0.9996, help='Alpha for exponential moving average')
     parser.add_argument('--epoch_switch', type=int, default=1000, help='Epoch to switch teacher/student')
     parser.add_argument('--oracle', type=int, default=0, help='Use oracle bounding boxes for training')
+    parser.add_argument('--reliable_voting', type=int, default=0, help='Use reliable voting for teaching')
     # Loss coefficients
     parser.add_argument('--use_focal_loss', type=int, default=0, help='Whether to use focal loss')
     parser.add_argument('--coef_src', type=float, default=1.0, help='Domain loss coefficient')
@@ -72,7 +74,7 @@ def parse_args():
     parser.add_argument('--coef_size_reg_loss', type=float, default=10.0 / 3.0, help='Size reg loss coefficient')
     parser.add_argument('--coef_cls_loss', type=float, default=1.0, help='Semantic cls loss coefficient')
     # Output configuration
-    parser.add_argument('--output_dir', default='<output_dir>')
+    parser.add_argument('--output_dir', default='./outputs')
     parser.add_argument('--ap_iou_threshold', type=float, default=0.25, help='AP IoU threshold')
     # Other configurations
     parser.add_argument('--ckpt_detector', default=None, help='Resume detector checkpoint path')
@@ -84,10 +86,12 @@ def parse_args():
     parser.add_argument('--flush', type=int, default=1, help='Flush the output log')
     args_parsed = parser.parse_args()
     args_parsed.axis_aligned = bool(args_parsed.axis_aligned)
+    args_parsed.mean_size_prior = bool(args_parsed.mean_size_prior)
     args_parsed.use_color = bool(args_parsed.use_color)
     args_parsed.use_height = bool(args_parsed.use_height)
     args_parsed.use_focal_loss = bool(args_parsed.use_focal_loss)
     args_parsed.oracle = bool(args_parsed.oracle)
+    args_parsed.reliable_voting = bool(args_parsed.reliable_voting)
     args_parsed.flush = bool(args_parsed.flush)
     return args_parsed
 
@@ -189,6 +193,7 @@ def build_model(num_classes, num_heading_areas, mean_sizes):
     else:
         raise NotImplementedError('Model not implemented: {}'.format(args.model))
     if args.ckpt_detector is not None:
+        print(f'Load detector from {args.ckpt_detector}')
         detector.load_state_dict(torch.load(args.ckpt_detector, weights_only=True, map_location=device))
     if args.distributed:
         detector = DistributedDataParallel(detector, device_ids=[args.gpu])
@@ -201,6 +206,7 @@ def build_optimizer(detector):
         param_dicts = [{'params': detector.parameters(), 'lr': args.lr}]
         optimizer = optim.AdamW(param_dicts, lr=args.lr, weight_decay=args.weight_decay)
         if args.ckpt_optimizer is not None:
+            print(f'Load optimizer from {args.ckpt_optimizer}')
             ckpt = torch.load(args.ckpt_optimizer, map_location=device)
             args.start_epoch = ckpt['epoch'] + 1
             optimizer.load_state_dict(ckpt['opt'])
@@ -229,7 +235,10 @@ def source_only():
         src_train_dataset, _ = build_datasets(args.tgt_dataset, few_shot=args.few_shot)
         src_train_dataset.mean_sizes = mean_sizes
     _, tgt_val_dataset = build_datasets(args.tgt_dataset)
-    tgt_val_dataset.mean_sizes = src_train_dataset.mean_sizes
+    if args.mean_size_prior:
+        src_train_dataset.mean_sizes = tgt_val_dataset.mean_sizes
+    else:
+        tgt_val_dataset.mean_sizes = src_train_dataset.mean_sizes
     # Build dataloaders
     src_train_loader = build_dataloader_from_dataset(src_train_dataset, 'train')
     tgt_val_loader = build_dataloader_from_dataset(tgt_val_dataset, 'val')
@@ -295,13 +304,25 @@ def teaching():
     student, criterion_src = build_model(num_classes, num_heading_areas, mean_sizes)
     print('Detector parameters: ', get_param_num(student), flush=args.flush)
     teacher, criterion_tgt = build_model(num_classes, num_heading_areas, mean_sizes)
-    criterion_tgt.coef_vote_loss = criterion_tgt.coef_objectness_loss = 0.0
+    criterion_tgt.coef_center_loss = criterion_tgt.coef_heading_cls_loss = criterion_tgt.heading_reg_loss = \
+        criterion_tgt.coef_size_cls_loss = criterion_tgt.coef_size_reg_loss = 0.0
     evaluator = Evaluator(num_classes, categories, args.ignored_categories, args.ap_iou_threshold)
     # Build optimizer
     optimizer = build_optimizer(student)
+    # If perform reliable voting, first calculate the info tensors
+    if args.reliable_voting:
+        proposal_features, pred_categories = calculate_rv_info(
+            src_train_loader, args.num_points, teacher, device, flush=args.flush)
+        model = teacher if hasattr(teacher, 'rv_proposal_features') else teacher.module
+        model.rv_proposal_features = proposal_features
+        model.rv_pred_categories = pred_categories
     # Train the model
     best_ap = 0.0
     for epoch in range(args.start_epoch, args.epoch_num):
+        # Set the epoch for the sampler
+        if args.distributed and hasattr(src_train_loader.sampler, 'set_epoch'):
+            src_train_loader.sampler.set_epoch(epoch)
+            tgt_train_loader.sampler.set_epoch(epoch)
         student, teacher = teach_one_epoch(
             src_loader=src_train_loader,
             tgt_loader=tgt_train_loader,
@@ -312,6 +333,7 @@ def teaching():
             criterion_tgt=criterion_tgt,
             obj_threshold=args.obj_threshold,
             sem_threshold=args.sem_threshold,
+            reliable_voting=args.reliable_voting,
             alpha_ema=args.alpha_ema,
             coef_src=args.coef_src,
             coef_tgt=args.coef_tgt,

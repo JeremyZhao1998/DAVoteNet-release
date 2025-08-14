@@ -1,32 +1,21 @@
 N_GPUS=1
 BATCH_SIZE=32
 DATA_ROOT=<your_data_root>
-OUTPUT_DIR=<your_output_dir>/front2sun/vss
-
-python vss_process.py \
---data_root ${DATA_ROOT} \
---src_dataset 3dfront \
---split_set train \
---axis_aligned 0
-
-python vss_process.py \
---data_root ${DATA_ROOT} \
---src_dataset 3dfront \
---split_set val \
---axis_aligned 0
+OUTPUT_DIR=<your_output_dir>/scan2sun/size_prior
 
 CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=8 torchrun \
---rdzv_endpoint localhost:27502 \
+--rdzv_endpoint localhost:29506 \
 --nproc_per_node=${N_GPUS} \
 main.py \
 --mode source_only \
 --data_root ${DATA_ROOT} \
---src_dataset 3dfront_vss \
+--src_dataset scannet \
 --tgt_dataset sunrgbd \
 --num_points_preload 100000 \
 --num_points 40000 \
---categories bed bookshelf cabinet chair desk lamp night_stand shelf sofa table others \
---axis_aligned 0 \
+--categories bed bookshelf cabinet chair desk garbage_can lamp night_stand shelf sink sofa table toilet tv others \
+--axis_aligned 1 \
+--mean_size_prior 1 \
 --epoch_num 90 \
 --epoch_eval 1 \
 --batch_size ${BATCH_SIZE} \

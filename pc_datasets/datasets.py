@@ -22,7 +22,6 @@ class PCDetectionDataset(Dataset):
                  use_color=False,
                  use_height=False,
                  augment=False,
-                 vss=0.0,
                  few_shot=-1,
                  return_votes=False,
                  vote_factor=3):
@@ -42,7 +41,6 @@ class PCDetectionDataset(Dataset):
         self.info_path = os.path.join(data_root, dataset_name, data_folder + 'train', 'info')
         self.mean_color_rgb = np.load(os.path.join(str(self.info_path), 'mean_color.npz'))['mean_color']
         self.augment = augment
-        self.vss = vss
         self.use_color = use_color
         self.use_height = use_height
         # Category information
@@ -185,11 +183,6 @@ class PCDetectionDataset(Dataset):
             point_votes, point_votes_mask, label_mask = self.get_point_votes(point_cloud, centers, corners, categories)
         else:
             point_votes, point_votes_mask, label_mask = None, None, None
-        # # VSS
-        if self.vss > 0.0 and random.random() < self.vss:
-            assert self.return_votes
-            point_cloud = aug.virtual_scan_simulation(point_cloud, label_mask)
-            point_cloud = pc_utils.random_sampling(point_cloud, self.num_points)
         # # Padding
         box_num, padding_num = bboxes.shape[0], self.max_num_obj - bboxes.shape[0]
         gt_dict = {

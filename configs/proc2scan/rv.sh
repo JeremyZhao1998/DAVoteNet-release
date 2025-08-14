@@ -1,10 +1,10 @@
 N_GPUS=1
 BATCH_SIZE=16
 DATA_ROOT=<your_data_root>
-OUTPUT_DIR=<your_output_dir>/proc2scan/mean_teacher
+OUTPUT_DIR=<your_output_dir>/proc2scan/rv
 
 CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=8 torchrun \
---rdzv_endpoint localhost:28503 \
+--rdzv_endpoint localhost:28504 \
 --nproc_per_node=${N_GPUS} \
 main.py \
 --mode teaching \
@@ -24,8 +24,9 @@ main.py \
 --lr_decay_rates 0.1 \
 --weight_decay 0.01 \
 --coef_tgt 0.5 \
---obj_threshold 0.9 \
---sem_threshold 0.9 \
+--obj_threshold 0.85 \
+--sem_threshold 0.85 \
+--reliable_voting 1 \
 --output_dir ${OUTPUT_DIR} \
 --ckpt_detector ${OUTPUT_DIR}/../source_only/model_best.pth \
 --seed 1618

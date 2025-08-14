@@ -1,19 +1,19 @@
 N_GPUS=1
 BATCH_SIZE=16
 DATA_ROOT=<your_data_root>
-OUTPUT_DIR=<your_output_dir>/proc2scan/mean_teacher
+OUTPUT_DIR=<your_output_dir>/scan2sun/mean_teacher
 
 CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=8 torchrun \
---rdzv_endpoint localhost:28503 \
+--rdzv_endpoint localhost:29503 \
 --nproc_per_node=${N_GPUS} \
 main.py \
 --mode teaching \
 --data_root ${DATA_ROOT} \
---src_dataset procthor \
---tgt_dataset scannet \
+--src_dataset scannet \
+--tgt_dataset sunrgbd \
 --num_points_preload 100000 \
 --num_points 40000 \
---categories bed cabinet chair desk lamp shelf sofa table others \
+--categories bed bookshelf cabinet chair desk garbage_can lamp night_stand shelf sink sofa table toilet tv others \
 --axis_aligned 1 \
 --epoch_num 20 \
 --epoch_eval 1 \

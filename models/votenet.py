@@ -137,6 +137,7 @@ class ProposalModule(nn.Module):
                 num_heading_areas * 2 for heading area classification scores and heading offsets regressions,
                 num_classes * 4 for size classification scores and size offsets regressions,
                 num_classes for semantic classification scores
+            features: (B, num_proposal, 128)
         """
         if self.sampling == 'vote_fps':
             # Farthest point sampling (FPS) on votes
@@ -161,7 +162,7 @@ class ProposalModule(nn.Module):
         net = relu(self.bn1(self.conv1(features)))
         net = relu(self.bn2(self.conv2(net)))
         raw_proposals = self.conv3(net)
-        return xyz, sample_inds, raw_proposals.transpose(2, 1)
+        return xyz, sample_inds, raw_proposals.transpose(2, 1), features.transpose(2, 1)
 
 
 class VoteNet(nn.Module):
@@ -195,10 +196,41 @@ class VoteNet(nn.Module):
         # Vote aggregation and detection
         self.proposal_module = ProposalModule(num_classes, num_heading_areas, self.mean_sizes, num_proposals, sampling)
         self.gt_vote_factor = gt_vote_factor
+        # Features for reliable voting
+        self.rv_proposal_features = None
+        self.rv_pred_categories = None
+
+    @staticmethod
+    def _cos_similarity_matrix(x, y):
+        x_norm = torch.nn.functional.normalize(x, dim=1)
+        y_norm = torch.nn.functional.normalize(y, dim=1)
+        return torch.matmul(x_norm, y_norm.T)
+
+    def _reliable_voting(self, label_masks, proposal_feature_tgt, categories_tgt):
+        # Reliable Voted (RV) Target Pseudo Label Generation for Enhancing Domain Adaptation
+        rv_vote_threshold = 2
+        assert proposal_feature_tgt.shape[-1] == self.rv_proposal_features.shape[-1]
+        bs, num_proposals, feature_dim = proposal_feature_tgt.shape
+        feature_sim = self._cos_similarity_matrix(
+            proposal_feature_tgt.view(-1, feature_dim),
+            self.rv_proposal_features
+        )  # shape [bs * num_proposals, num_rv_proposals]
+        _, idx = torch.topk(feature_sim, 5, dim=-1)  # shape [bs * num_proposals, 5]
+        rv_labels = self.rv_pred_categories[idx]  # shape [bs * num_proposals, 5]
+        rv_labels = rv_labels.view(bs, num_proposals, -1)
+        vote_cnt = torch.sum(torch.eq(rv_labels, categories_tgt.unsqueeze(-1)), dim=-1)  # shape [bs, num_proposals]
+        label_masks[vote_cnt < rv_vote_threshold] = 0
+        return label_masks
 
     @torch.no_grad()
-    def post_process(self, point_clouds, outputs, obj_threshold=0.05,
-                     sem_threshold=0.0, nms_threshold=0.25, get_votes=False):
+    def post_process(self,
+                     point_clouds,
+                     outputs,
+                     obj_threshold=0.05,
+                     sem_threshold=0.0,
+                     nms_threshold=0.25,
+                     get_votes=False,
+                     proposal_feature=None):
         centers = outputs['centers']
         batch_size, num_proposals = centers.shape[0], centers.shape[1]
         heading_cls = torch.argmax(outputs['heading_scores'], -1)
@@ -222,6 +254,9 @@ class VoteNet(nn.Module):
         # Remove category 'others' boxes
         categories = torch.argmax(outputs['sem_cls_scores'], -1)
         label_masks = label_masks * (categories != self.proposal_module.num_classes - 1)
+        # Reliable voting
+        if proposal_feature is not None:
+            label_masks = self._reliable_voting(label_masks, proposal_feature, categories)
         # None maximum suppression
         label_masks = bbox_utils.nms_3d(corners, obj_probs, categories, label_masks, nms_threshold)
         # Generate votes
@@ -289,8 +324,9 @@ class VoteNet(nn.Module):
         vote_features = vote_features.div(vote_features_norm.unsqueeze(1))
         outputs['vote_xyz'] = vote_xyz
         # Proposal module forward
-        aggregated_vote_xyz, aggregated_vote_inds, raw_proposals = self.proposal_module(
+        aggregated_vote_xyz, aggregated_vote_inds, raw_proposals, proposal_features = self.proposal_module(
             vote_xyz, vote_features, seed_xyz)
         outputs['aggregated_vote_xyz'] = aggregated_vote_xyz
+        outputs['proposal_features'] = proposal_features
         outputs.update(self.proposal_module.decode_raw_proposals(raw_proposals, aggregated_vote_xyz))
         return outputs

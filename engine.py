@@ -2,13 +2,10 @@ import time
 import datetime
 from itertools import cycle
 from copy import deepcopy
-import numpy as np
 import torch
 from torch.utils.data import DataLoader
 
 from models import VoteNet, VoteNetCriterion, Evaluator
-from pc_datasets.augmentations import density_aug
-from utils.visualization import draw_point_cloud
 
 
 def adjust_learning_rate(optimizer, epoch, base_lr, lr_decay_steps, lr_decay_rates):
@@ -103,6 +100,47 @@ def train_one_epoch(train_loader: DataLoader,
     return detector
 
 
+@torch.no_grad()
+def calculate_rv_info(train_loader: DataLoader,
+                      num_points: int,
+                      detector: VoteNet,
+                      device: torch.device,
+                      print_freq: int = 10,
+                      flush: bool = False):
+    start_time = time.time()
+    detector.eval()
+    proposal_features_all, pred_categories_all = [], []
+    for batch_idx, (batch_data_label) in enumerate(train_loader):
+        batch_data_label = apply_subsample(batch_data_label, num_points)
+        batch_data_label = batch_data_to_device(batch_data_label, device)
+        outputs = detector(batch_data_label['point_clouds'])
+        model = detector if hasattr(detector, 'post_process') else detector.module
+        predictions = model.post_process(
+            batch_data_label['point_clouds'],
+            outputs,
+            obj_threshold=0.5,
+            sem_threshold=0.5,
+        )
+        label_masks = predictions['label_masks']
+        label_masks = label_masks.view(-1)
+        proposal_features = outputs['proposal_features']
+        proposal_features = proposal_features.view(-1, proposal_features.shape[-1])[label_masks]
+        pred_categories = predictions['categories']
+        pred_categories = pred_categories.view(-1)[label_masks]
+        proposal_features_all.append(proposal_features)
+        pred_categories_all.append(pred_categories)
+        if (batch_idx + 1) % print_freq == 0:
+            print('Calculating rv info of batch: %03d / %03d'
+                  % (batch_idx + 1, len(train_loader)), flush=flush)
+    proposal_features_all = torch.cat(proposal_features_all, dim=0)
+    pred_categories_all = torch.cat(pred_categories_all, dim=0)
+    end_time = time.time()
+    time_str = str(datetime.timedelta(seconds=int(end_time - start_time)))
+    print(f'Calculating rv info done, select {proposal_features_all.shape[0]} proposals', flush=flush)
+    print('Time cost: {}'.format(time_str), flush=flush)
+    return proposal_features_all, pred_categories_all
+
+
 def teach_one_epoch(src_loader: DataLoader,
                     tgt_loader: DataLoader,
                     num_points: int,
@@ -113,6 +151,7 @@ def teach_one_epoch(src_loader: DataLoader,
                     optimizer: torch.optim.Optimizer,
                     obj_threshold: float,
                     sem_threshold: float,
+                    reliable_voting: bool,
                     alpha_ema: float,
                     coef_src: float,
                     coef_tgt: float,
@@ -127,23 +166,20 @@ def teach_one_epoch(src_loader: DataLoader,
     start_time = time.time()
     adjust_learning_rate(optimizer, epoch, base_lr, lr_decay_steps, lr_decay_rates)
     student.train()
+    teacher.eval()
     epoch_loss, epoch_obj_acc = 0, 0
     gt_box_num_cnt = {cls: 0 for cls in range(criterion_src.num_classes)}
     pseudo_box_num_cnt = {cls: 0 for cls in range(criterion_src.num_classes)}
-    for batch_idx, (data_label_src, data_label_tgt) in enumerate(zip(src_loader, cycle(tgt_loader))):
+    for batch_idx, (data_label_src, data_label_tgt) in enumerate(zip(cycle(src_loader), tgt_loader)):
         # Prepare data
-        choices = density_aug(data_label_src['point_clouds'], num_points)
-        data_label_src = apply_subsample(data_label_src, num_points, choices=choices)
+        data_label_src = apply_subsample(data_label_src, num_points)
         data_label_src = batch_data_to_device(data_label_src, device)
         data_label_tgt = apply_subsample(data_label_tgt, num_points)
         data_label_tgt = batch_data_to_device(data_label_tgt, device)
-        choices_aug = density_aug(data_label_tgt['point_clouds'], num_points)
-        data_label_tgt_aug = apply_subsample(data_label_tgt, num_points, choices=choices_aug)
-        data_label_tgt_aug = batch_data_to_device(data_label_tgt_aug, device)
         # Data forward pass to student model
         optimizer.zero_grad()
         outputs_src = student(data_label_src['point_clouds'])
-        outputs_tgt_aug = student(data_label_tgt_aug['point_clouds'])
+        outputs_tgt = student(data_label_tgt['point_clouds'])
         # Generate pseudo labels for target data
         if oracle:
             supervision = data_label_tgt
@@ -155,11 +191,13 @@ def teach_one_epoch(src_loader: DataLoader,
                     data_label_tgt['point_clouds'],
                     outputs_tch,
                     obj_threshold=obj_threshold,
-                    sem_threshold=sem_threshold
+                    sem_threshold=sem_threshold,
+                    proposal_feature=outputs_tch['proposal_features'] if reliable_voting else None,
+                    get_votes=True
                 )
         # Compute loss and gradients, update parameters.
         loss_src, loss_dict_src = criterion_src(outputs_src, data_label_src)
-        loss_tgt, loss_dict_tgt = criterion_tgt(outputs_tgt_aug, supervision)
+        loss_tgt, loss_dict_tgt = criterion_tgt(outputs_tgt, supervision)
         loss = coef_src * loss_src + coef_tgt * loss_tgt
         loss.backward()
         optimizer.step()
@@ -176,10 +214,10 @@ def teach_one_epoch(src_loader: DataLoader,
                 teacher.load_state_dict(state_dict)
         if (batch_idx + 1) % print_freq == 0:
             print('Epoch %d batch: %03d / %03d, loss_src: %f, loss_tgt: %f'
-                  % (epoch, batch_idx + 1, len(src_loader), loss_src.item(), loss_tgt.item()), flush=flush)
+                  % (epoch, batch_idx + 1, len(tgt_loader), loss_src.item(), loss_tgt.item()), flush=flush)
     end_time = time.time()
     time_str = str(datetime.timedelta(seconds=int(end_time - start_time)))
-    print('Mean teacher training epoch %d done. Epoch loss: %f ' % (epoch, epoch_loss / len(src_loader)), flush=flush)
+    print('Mean teacher training epoch %d done. Epoch loss: %f ' % (epoch, epoch_loss / len(tgt_loader)), flush=flush)
     print('GT box number: {}'.format(gt_box_num_cnt), flush=flush)
     if not oracle:
         print('Pseudo box number: {}'.format(pseudo_box_num_cnt), flush=flush)

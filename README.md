@@ -92,7 +92,7 @@ several domain adaptation baseline methods.
 We use [VoteNet](https://github.com/facebookresearch/votenet) as our base detector, 
 and do some modifications on data processing and code implementations, 
 making it run faster and save more memory.
-All experiments are conducted on a single NVIDIA 3090 GPU (24GB).
+All experiments can be conducted on a single NVIDIA 3090 GPU (24GB).
 You can also use multiple GPUs to speed up training with larger batch size.
 
 ## 2.1 Installation
@@ -110,7 +110,7 @@ You can also use multiple GPUs to speed up training with larger batch size.
 pip install "git+https://github.com/facebookresearch/pytorch3d.git@stable"
 ```
 
-Note that we implement voting and aggregation modules in [pytorch3d](https://github.com/facebookresearch/pytorch3d),
+We implement voting and aggregation modules by [pytorch3d](https://github.com/facebookresearch/pytorch3d),
 instead of the original CUDA layers by [VoteNet](https://github.com/facebookresearch/votenet).
 
 ### 2.1.3 Install other requirements
@@ -130,20 +130,25 @@ including:
 
 | benchmark  |   source    |  target   |      scenario       |         training scripts         |
 |:----------:|:-----------:|:---------:|:-------------------:|:--------------------------------:|
+| proc2scan  | ProcTHOR-OD |  ScanNet  |  synthetic-to-real  |  [proc2scan](configs/proc2scan)  |
 | front2scan |  3D Front   |  ScanNet  |  synthetic-to-real  | [front2scan](configs/front2scan) |
 | front2sun  |  3D Front   | SUN RGB-D |  synthetic-to-real  |  [front2sun](configs/front2sun)  |
-| proc2scan  | ProcTHOR-OD |  ScanNet  |  synthetic-to-real  |  [proc2scan](configs/proc2scan)  |
 |  scan2sun  |   ScanNet   | SUN RGB-D | point cloud quality |   [scan2sun](configs/scan2sun)   |
 |  pf2front  |  ProcFront  | 3D Front  |  layout adaptation  |   [pf2front](configs/pf2front)   |
 |  proc2pf   | ProcTHOR-OD | ProcFront | instance adaptation |    [proc2pf](configs/proc2pf)    |
 
-We here provide 5 training scripts for domain adaptation experiments for each adaptation benchmarks.
+We here provide 7 training scripts for each adaptation benchmarks:
 
-- `source_only.sh`: train the detector with source data and evaluate it on target data.
-- `vss.sh`: we use VSS augmented source data (proposed by [DODA](https://github.com/CVMI-Lab/DODA)) to train the detector.
-- `mean_teacher.sh`: we use the classical mean teacher framework (code modified from [MRT](https://github.com/JeremyZhao1998/MRT-release/edit/main/README.md)).
-- `rv.sh`: we use Reliable Voted Pseudo Labels proposed by [RV](https://openaccess.thecvf.com/content/CVPR2022/papers/Fan_Self-Supervised_Global-Local_Structure_Modeling_for_Point_Cloud_Domain_Adaptation_With_CVPR_2022_paper.pdf).
-- `target_oracle.sh`: train the detector with target data and evaluate it on target data.
+- Cross-domain basic training:
+- - `source_only.sh`: train the detector with source data and evaluate it on target data.
+- - `target_oracle.sh`: train the detector with target data and evaluate it on target data.
+- Using target domain prior:
+- - `few_shot.sh`: fine-tune the detector with 10-shots and 100-shots target domain annotated data.
+- - `size_prior.sh`: train the detector with source data, but with the target domain prior of mean size.
+- Unsupervised domain adaptation:
+- - `vss.sh`: we use VSS augmented source data (proposed by [DODA](https://github.com/CVMI-Lab/DODA)) to train the detector.
+- - `mean_teacher.sh`: we use the classical mean teacher framework (code modified from [MRT](https://github.com/JeremyZhao1998/MRT-release/edit/main/README.md)).
+- - `rv.sh`: we use Reliable Voted Pseudo Labels proposed by [RV](https://openaccess.thecvf.com/content/CVPR2022/papers/Fan_Self-Supervised_Global-Local_Structure_Modeling_for_Point_Cloud_Domain_Adaptation_With_CVPR_2022_paper.pdf).
 
 To run each script, simply modify the configuration file, mainly configure the 1-4 lines
 including the {N_GPUS}, {BATCH_SIZE}, {DATA_ROOT} and {OUTPUT_DIR}, and then run:
@@ -159,65 +164,57 @@ require to first train a source-only model, and then do mean teacher training.
 
 ### 2.2.2 Results
 
+proc2scan:
+
+|    method     | mAP@0.25 |                                          checkpoints & logs                                          |
+|:-------------:|:--------:|:----------------------------------------------------------------------------------------------------:|
+|  source_only  |  18.90   | [google drive](https://drive.google.com/drive/folders/13bcZPTFu4DiryYxiB4_fbugT3b6UMYoH?usp=sharing) |
+|   10_shots    |  17.47   | [google drive](https://drive.google.com/drive/folders/1PVAK4fcjWLKOFODEMXJMGFiI60axrlMz?usp=sharing) |
+|   100_shots   |  33.86   | [google drive](https://drive.google.com/drive/folders/1WSdNKRu7yLGPt_vIi4JbAYNlIfDCnhpj?usp=sharing) |
+|  size_prior   |  18.92   | [google drive](https://drive.google.com/drive/folders/1bdz2Sxv-TpvK0TcASiL4jVlxxpu7kjZ7?usp=sharing) |
+|      vss      |  20.31   | [google drive](https://drive.google.com/drive/folders/1XcmLaV00eymmmryhjhNIMh1CEDhelrxc?usp=sharing) |
+| mean_teacher  |  20.43   | [google drive](https://drive.google.com/drive/folders/1lfgrfpNMROmUgUyBtfIBeb5HKSYdfZqk?usp=sharing) |
+|      rv       |  20.89   | [google drive](https://drive.google.com/drive/folders/1PcZtDRh8nZ04oSEa9uRTuB5U9tfq21cy?usp=sharing) |
+| target_oracle |  46.31   | [google drive](https://drive.google.com/drive/folders/1vVBrwXkpp-01Cl3GgsrNRd-su9ge38c2?usp=sharing) |
+
 front2scan:
 
-|    method     | mAP@0.25 | checkpoints |    logs     |
-|:-------------:|:--------:|:-----------:|:-----------:|
-|  source_only  |  12.58   | coming soon | coming soon |
-|      vss      |    --    | coming soon | coming soon |
-| mean_teacher  |    --    | coming soon | coming soon |
-|      rv       |    --    | coming soon | coming soon |
-| target_oracle |  48.08   | coming soon | coming soon |
+|    method     | mAP@0.25 |                                          checkpoints & logs                                          |
+|:-------------:|:--------:|:----------------------------------------------------------------------------------------------------:|
+|  source_only  |  12.58   | [google drive](https://drive.google.com/drive/folders/1oe0hVvmsNHitck9swC6qWrjOmqYgnl4e?usp=sharing) |
+|   10_shots    |  14.04   | [google drive](https://drive.google.com/drive/folders/1iaI3cQfj77JRivPAT6tXrg8pyJX3yrYr?usp=sharing) |
+|   100_shots   |  25.83   | [google drive](https://drive.google.com/drive/folders/1dO47nWPtVOxb8Dq8gogIc2RdLNpRASGE?usp=sharing) |
+|  size_prior   |  13.53   | [google drive](https://drive.google.com/drive/folders/191N0eKYyT4-w7WeOG0gvWK0xL7S4COdO?usp=sharing) |
+|      vss      |  16.72   | [google drive](https://drive.google.com/drive/folders/16xvT0blrYiuTsGUqVK_8hUWKxM1YO9JT?usp=sharing) |
+| mean_teacher  |  15.03   | [google drive](https://drive.google.com/drive/folders/10fZzhUmA8pKagso_abyfxwrpXcTGdFrz?usp=sharing) |
+|      rv       |  15.27   | [google drive](https://drive.google.com/drive/folders/1G6q6xeHB9Qryzvz8FgsgvTe7RdQfz4pN?usp=sharing) |
+| target_oracle |  48.08   | [google drive](https://drive.google.com/drive/folders/18cwtMEIi0z0Ds9drmmddqkUqF-uZYDro?usp=sharing) |
 
 front2sun:
 
-|    method     | mAP@0.25 | checkpoints |    logs     |
-|:-------------:|:--------:|:-----------:|:-----------:|
-|  source_only  |   9.87   | coming soon | coming soon |
-|      vss      |    --    | coming soon | coming soon |
-| mean_teacher  |    --    | coming soon | coming soon |
-|      rv       |    --    | coming soon | coming soon |
-| target_oracle |  45.53   | coming soon | coming soon |
-
-proc2scan:
-
-|    method     | mAP@0.25 | checkpoints |    logs     |
-|:-------------:|:--------:|:-----------:|:-----------:|
-|  source_only  |  18.92   | coming soon | coming soon |
-|      vss      |    --    | coming soon | coming soon |
-| mean_teacher  |    --    | coming soon | coming soon |
-|      rv       |    --    | coming soon | coming soon |
-| target_oracle |  46.31   | coming soon | coming soon |
+|    method     | mAP@0.25 |                                          checkpoints & logs                                          |
+|:-------------:|:--------:|:----------------------------------------------------------------------------------------------------:|
+|  source_only  |   9.87   | [google drive](https://drive.google.com/drive/folders/1evZDDrDKIPDeQKUub5kgdBXvXS7yMn5z?usp=sharing) |
+|   10_shots    |  10.39   | [google drive](https://drive.google.com/drive/folders/1V7_2RpKBDYhU2Ja8P8mhkz_j1K5t3leg?usp=sharing) |
+|   100_shots   |  10.54   | [google drive](https://drive.google.com/drive/folders/1iwi1hnTOWsUCG2Rxf2uacJcD-RL8wHJy?usp=sharing) |
+|  size_prior   |   9.92   | [google drive](https://drive.google.com/drive/folders/1S92Zz0uTlhLL-nBbgyOFc5nNjQ0yoq1l?usp=sharing) |
+|      vss      |  10.61   | [google drive](https://drive.google.com/drive/folders/1WYfBHu8HYR8zpxitx2vbKQkGsgfltdB0?usp=sharing) |
+| mean_teacher  |  10.32   | [google drive](https://drive.google.com/drive/folders/1qmm6fs_3ZeXCXcG64tH-hX-8NAfyLrAt?usp=sharing) |
+|      rv       |  10.40   | [google drive](https://drive.google.com/drive/folders/1kLqhgOil_YBvl3VjGeTC_HawQW2QITMn?usp=sharing) |
+| target_oracle |  45.53   | [google drive](https://drive.google.com/drive/folders/1PBbmNV6kUVG19NMUeaw2XUnZLInv1BGv?usp=sharing) |
 
 scan2sun:
 
-|    method     | mAP@0.25 | checkpoints |    logs     |
-|:-------------:|:--------:|:-----------:|:-----------:|
-|  source_only  |  23.56   | coming soon | coming soon |
-|      vss      |    --    | coming soon | coming soon |
-| mean_teacher  |    --    | coming soon | coming soon |
-|      rv       |    --    | coming soon | coming soon |
-| target_oracle |  44.86   | coming soon | coming soon |
-
-pf2front:
-
-|    method     | mAP@0.25 | checkpoints |    logs     |
-|:-------------:|:--------:|:-----------:|:-----------:|
-|  source_only  |    --    | coming soon | coming soon |
-|      vss      |    --    | coming soon | coming soon |
-| mean_teacher  |    --    | coming soon | coming soon |
-|      rv       |    --    | coming soon | coming soon |
-| target_oracle |    --    | coming soon | coming soon |
-
-proc2pf:
-
-|    method     | mAP@0.25 | checkpoints |    logs     |
-|:-------------:|:--------:|:-----------:|:-----------:|
-|  source_only  |    --    | coming soon | coming soon |
-|      vss      |    --    | coming soon | coming soon |
-| mean_teacher  |    --    | coming soon | coming soon |
-|      rv       |    --    | coming soon | coming soon |
-| target_oracle |    --    | coming soon | coming soon |
+|    method     | mAP@0.25 |                                          checkpoints & logs                                          |
+|:-------------:|:--------:|:----------------------------------------------------------------------------------------------------:|
+|  source_only  |  23.56   | [google drive](https://drive.google.com/drive/folders/1pho3p5aCyyHACR3VjIVBW3z6ZxnzJkMu?usp=sharing) |
+|   10_shots    |  24.05   | [google drive](https://drive.google.com/drive/folders/1PyDhy9l-G3TzeD-KajjV8P0erMKh1Ssa?usp=sharing) |
+|   100_shots   |  24.58   | [google drive](https://drive.google.com/drive/folders/1kFQQ6sGLH8F9ql3j8WEJET34x4DmYmj1?usp=sharing) |
+|  size_prior   |  25.56   | [google drive](https://drive.google.com/drive/folders/1dqpI3TmLUAnHMmC7uaUTBMDFiGRse8yc?usp=sharing) |
+|      vss      |  25.26   | [google drive](https://drive.google.com/drive/folders/1GubLJkemhvSwtSp_mgXDnhcy1tsFnxcG?usp=sharing) |
+| mean_teacher  |  25.25   | [google drive](https://drive.google.com/drive/folders/1Pm2xo5hTRu45DY1PWb8q59psIN4M--E2?usp=sharing) |
+|      rv       |  24.92   | [google drive](https://drive.google.com/drive/folders/1N8fo1zDtg726DLKp1PH_NF3S3K576mgK?usp=sharing) |
+| target_oracle |  45.70   | [google drive](https://drive.google.com/drive/folders/1N3OdYcQlbBeUeYGBmlMchKRWT2Xj6L6G?usp=sharing) |
 
 ## 3. Citation
 

@@ -56,8 +56,13 @@ def sample_points_from_mesh(scene_path, additional_path, num_points):
     scene = trimesh.Scene()
     obj_list = [file for file in os.listdir(scene_path) if file.endswith('.obj')]
     for file in obj_list:
-        obj = trimesh.load_mesh(os.path.join(scene_path, file))
-        scene += obj
+        file_name = file.split('.')[0]
+        if file_name in os.listdir(additional_path):
+            obj = trimesh.load_mesh(os.path.join(additional_path, file_name, 'raw_model.obj'))
+            scene += obj
+        else:
+            obj = trimesh.load_mesh(os.path.join(scene_path, file))
+            scene += obj
     points_cnt, mesh_list, points_all, colors_all = [], [], [], []
     for mesh in scene.geometry.values():
         mesh_list.append(mesh)
@@ -95,16 +100,17 @@ def sample_points_from_mesh(scene_path, additional_path, num_points):
     colors_all = np.concatenate(colors_all, axis=0)
     pc_np = np.hstack([points_all, colors_all])
     os.system(f"rm -r {scene_path}")
-    """from utils.visualization import draw_point_cloud
-    draw_point_cloud(pc_np)
-    print(scene_path)
-    exit(0)"""
+    """if additional_path is not None:
+        from utils.visualization import draw_point_cloud
+        draw_point_cloud(pc_np)
+        print(scene_path)
+        exit(0)"""
     return pc_np
 
 
 def convert_data(raw_data_path, front_data_path, output_path, split, axis_aligned, num_points=200000):
     mesh_root = os.path.join(raw_data_path, f'{split}_mesh')
-    front_root = os.path.join(front_data_path, f'{split}_mesh_3dfront_mix') if front_data_path is not None else None
+    front_root = os.path.join(front_data_path, f'{split}_mesh') if front_data_path is not None else None
     anno_root = os.path.join(raw_data_path, f'{split}_anno')
     scene_names = sorted([name.split('.')[0] for name in os.listdir(mesh_root)])
     # Set output path
@@ -209,8 +215,8 @@ def convert_data(raw_data_path, front_data_path, output_path, split, axis_aligne
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--raw_data_path', type=str, default='/home/zhaozj/Datasets/procthor')
-    parser.add_argument('--front_data_path', type=str, default=None)
-    parser.add_argument('--output_root', type=str, default='/home/zhaozj/Datasets/procthor')
+    parser.add_argument('--front_data_path', type=str, default='/home/zhaozj/Datasets/procfront')
+    parser.add_argument('--output_root', type=str, default='/home/zhaozj/Datasets/procfront')
     parser.add_argument('--axis_aligned', type=int, default=1, help='Use axis aligned boxes.')
     parser.add_argument('--num_points', type=int, default=200000)
     parser.add_argument('--seed', type=int, default=0, help='Random seed')
