@@ -120,7 +120,7 @@ def convert_data(data_root, raw_data_path, split, max_num_points, v1=False, axis
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data_root', type=str, default='/home/zhaozj/Datasets/sunrgbd')
+    parser.add_argument('--data_root', type=str, default='<your_data_root>/sunrgbd')
     parser.add_argument('--raw_data_path', type=str, default='sunrgbd_trainval')
     parser.add_argument('--num_points', type=int, default=200000)
     parser.add_argument('--v1', type=int, default=0, help='Use SUN_RGBD v1 data split.')

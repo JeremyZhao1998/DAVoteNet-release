@@ -4,7 +4,7 @@ DATA_ROOT=<your_data_root>
 OUTPUT_DIR=<your_output_dir>/scan2sun/target_only
 
 CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=8 torchrun \
---rdzv_endpoint localhost:29501 \
+--rdzv_endpoint localhost:31501 \
 --nproc_per_node=${N_GPUS} \
 main.py \
 --mode source_only \

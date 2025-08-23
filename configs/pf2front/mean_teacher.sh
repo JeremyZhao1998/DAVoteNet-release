@@ -1,25 +1,25 @@
-N_GPUS=1
-BATCH_SIZE=16
+N_GPUS=2
+BATCH_SIZE=32
 DATA_ROOT=<your_data_root>
-OUTPUT_DIR=<your_output_dir>/front2scan/mean_teacher
+OUTPUT_DIR=<your_output_dir>/pf2front/mean_teacher
 
-CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=8 torchrun \
---rdzv_endpoint localhost:26506 \
+CUDA_VISIBLE_DEVICES=0,1 OMP_NUM_THREADS=8 torchrun \
+--rdzv_endpoint localhost:28503 \
 --nproc_per_node=${N_GPUS} \
 main.py \
 --mode teaching \
 --data_root ${DATA_ROOT} \
---src_dataset 3dfront \
---tgt_dataset scannet \
+--src_dataset procfront \
+--tgt_dataset 3dfront \
 --num_points_preload 100000 \
 --num_points 40000 \
---categories bed bookshelf cabinet chair desk lamp night_stand shelf sofa table others \
+--categories bed cabinet chair desk lamp shelf sofa table tv_stand others \
 --axis_aligned 1 \
 --epoch_num 20 \
 --epoch_eval 1 \
 --batch_size ${BATCH_SIZE} \
 --eval_batch_size $((BATCH_SIZE * 2)) \
---lr 1e-9 \
+--lr 1e-8 \
 --lr_decay_steps 10 \
 --lr_decay_rates 0.1 \
 --weight_decay 0.01 \

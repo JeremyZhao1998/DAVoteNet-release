@@ -16,7 +16,7 @@ python vss_process.py \
 --axis_aligned 1
 
 CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=8 torchrun \
---rdzv_endpoint localhost:28502 \
+--rdzv_endpoint localhost:30502 \
 --nproc_per_node=${N_GPUS} \
 main.py \
 --mode source_only \

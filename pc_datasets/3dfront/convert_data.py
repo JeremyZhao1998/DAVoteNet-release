@@ -110,8 +110,8 @@ def convert_data(raw_data_path, output_path, split, axis_aligned=False, num_poin
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--raw_data_path', type=str, default='/home/zhaozj/Datasets/3dfront')
-    parser.add_argument('--output_root', type=str, default='/home/zhaozj/Datasets/3dfront')
+    parser.add_argument('--raw_data_path', type=str, default='<your_data_root>/3dfront')
+    parser.add_argument('--output_root', type=str, default='<your_data_root>/3dfront')
     parser.add_argument('--num_points', type=int, default=100000)
     parser.add_argument('--axis_aligned', type=int, default=0, help='Use axis aligned boxes.')
     parser.add_argument('--seed', type=int, default=0)
@@ -128,10 +128,10 @@ if __name__ == '__main__':
         axis_aligned=args.axis_aligned,
         num_points=args.num_points
     )
-    """convert_data(
+    convert_data(
         raw_data_path=args.raw_data_path,
         output_path=args.output_root,
         split='train',
         axis_aligned=args.axis_aligned,
         num_points=args.num_points
-    )"""
+    )

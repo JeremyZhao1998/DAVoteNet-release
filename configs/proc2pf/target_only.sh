@@ -1,26 +1,26 @@
-N_GPUS=1
-BATCH_SIZE=32
+N_GPUS=4
+BATCH_SIZE=64
 DATA_ROOT=<your_data_root>
-OUTPUT_DIR=<your_output_dir>/proc2scan/source_only
+OUTPUT_DIR=<your_output_dir>/proc2pf/target_only
 
-CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=8 torchrun \
---rdzv_endpoint localhost:30500 \
+CUDA_VISIBLE_DEVICES=0,1,2,3 OMP_NUM_THREADS=8 torchrun \
+--rdzv_endpoint localhost:29501 \
 --nproc_per_node=${N_GPUS} \
 main.py \
 --mode source_only \
 --data_root ${DATA_ROOT} \
---src_dataset procthor \
---tgt_dataset scannet \
+--src_dataset procfront \
+--tgt_dataset procfront \
 --num_points_preload 100000 \
 --num_points 40000 \
---categories bed cabinet chair desk lamp shelf sofa table others \
+--categories bed cabinet chair desk lamp shelf sofa table tv_stand others \
 --axis_aligned 1 \
---epoch_num 90 \
+--epoch_num 60 \
 --epoch_eval 1 \
 --batch_size ${BATCH_SIZE} \
 --eval_batch_size $((BATCH_SIZE * 2)) \
 --lr 0.008 \
---lr_decay_steps 65 80 \
+--lr_decay_steps 40 50 \
 --lr_decay_rates 0.1 0.1 \
 --weight_decay 0.01 \
 --output_dir ${OUTPUT_DIR} \

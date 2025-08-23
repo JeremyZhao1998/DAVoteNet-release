@@ -30,8 +30,8 @@ main.py \
 --output_dir ${OUTPUT_DIR} \
 --seed 1618
 
-echo "Processing 100-shots annotated target samples fine-tuning"
 OUTPUT_DIR=<your_output_dir>/front2sun/100_shots
+echo "Processing 100-shots annotated target samples fine-tuning"
 
 CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=8 torchrun \
 --rdzv_endpoint localhost:27505 \

@@ -53,6 +53,7 @@ def srgb_to_linear(image: Image.Image) -> Image.Image:
 def sample_points_from_mesh(scene_path, additional_path, num_points):
     os.system(f"mkdir -p {scene_path}")
     os.system(f"tar -xf {scene_path}.tar.xz -C {scene_path}")
+    os.system(f"tar -xf {additional_path}.tar.xz -C {additional_path}")
     scene = trimesh.Scene()
     obj_list = [file for file in os.listdir(scene_path) if file.endswith('.obj')]
     for file in obj_list:
@@ -100,11 +101,7 @@ def sample_points_from_mesh(scene_path, additional_path, num_points):
     colors_all = np.concatenate(colors_all, axis=0)
     pc_np = np.hstack([points_all, colors_all])
     os.system(f"rm -r {scene_path}")
-    """if additional_path is not None:
-        from utils.visualization import draw_point_cloud
-        draw_point_cloud(pc_np)
-        print(scene_path)
-        exit(0)"""
+    os.system(f"rm -r {additional_path}")
     return pc_np
 
 
@@ -182,11 +179,6 @@ def convert_data(raw_data_path, front_data_path, output_path, split, axis_aligne
             obj_cnt[category_name] += 1
         pc_room, choices = pc_utils.random_sampling(pc_room, num_points, return_choices=True)
         mean_color += np.mean(pc_room[:, 3: 6], axis=0)
-        """from utils.visualization import draw_point_cloud
-        draw_point_cloud(pc_room)
-        print(scene_name)
-        print(category_list)
-        exit(0)"""
         assert len(obj_list) == len(category_list)
         if len(obj_list) < 3:
             print('Too few objects in scene: %s' % scene_name)
@@ -214,9 +206,9 @@ def convert_data(raw_data_path, front_data_path, output_path, split, axis_aligne
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--raw_data_path', type=str, default='/home/zhaozj/Datasets/procthor')
-    parser.add_argument('--front_data_path', type=str, default='/home/zhaozj/Datasets/procfront')
-    parser.add_argument('--output_root', type=str, default='/home/zhaozj/Datasets/procfront')
+    parser.add_argument('--raw_data_path', type=str, default='<your_data_root>/procthor')
+    parser.add_argument('--front_data_path', type=str, default=None)
+    parser.add_argument('--output_root', type=str, default='<your_data_root>/procthor')
     parser.add_argument('--axis_aligned', type=int, default=1, help='Use axis aligned boxes.')
     parser.add_argument('--num_points', type=int, default=200000)
     parser.add_argument('--seed', type=int, default=0, help='Random seed')

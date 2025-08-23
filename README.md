@@ -22,7 +22,7 @@ We provide unified format of existing indoor 3D object detection datasets **Scan
 as well as our newly proposed large-scale datasets **ProcTHOR-OD** and **ProcFront**.
 Different datasets exhibit different distribution of style, point cloud quality, layout and instance features.
 
-Details of each dataset (introduction and convertion to our unified format) can be found in: [pc_datasets](pc_datasets).
+Details of each dataset (introduction and convertion to our unified format) can be found in: [pc_datasets](pc_datasets/README.md).
 
 ### Our proposed datasets
 
@@ -106,12 +106,14 @@ You can also use multiple GPUs to speed up training with larger batch size.
 
 ### 2.1.2 Install `pytorch3d`
 
+We implement voting and aggregation modules by [pytorch3d](https://github.com/facebookresearch/pytorch3d),
+instead of the original CUDA layers by [VoteNet](https://github.com/facebookresearch/votenet).
+The following command will install the latest stable version of pytorch3d which fits for your CUDA version, 
+but the compiling process may take quite some time, just be patient:
+
 ```bash
 pip install "git+https://github.com/facebookresearch/pytorch3d.git@stable"
 ```
-
-We implement voting and aggregation modules by [pytorch3d](https://github.com/facebookresearch/pytorch3d),
-instead of the original CUDA layers by [VoteNet](https://github.com/facebookresearch/votenet).
 
 ### 2.1.3 Install other requirements
 
@@ -120,6 +122,8 @@ pip install -r requirements.txt
 ```
 
 ## 2.2 Usage
+
+**Before training and evaluation, prepare the datasets following the instructions in [pc_datasets](pc_datasets/README.md).**
 
 ### 2.2.1 Training and evaluation
 
@@ -141,7 +145,7 @@ We here provide 7 training scripts for each adaptation benchmarks:
 
 - Cross-domain basic training:
 - - `source_only.sh`: train the detector with source data and evaluate it on target data.
-- - `target_oracle.sh`: train the detector with target data and evaluate it on target data.
+- - `target_only.sh`: train the detector with target data and evaluate it on target data.
 - Using target domain prior:
 - - `few_shot.sh`: fine-tune the detector with 10-shots and 100-shots target domain annotated data.
 - - `size_prior.sh`: train the detector with source data, but with the target domain prior of mean size.
@@ -216,6 +220,32 @@ scan2sun:
 |      rv       |  24.92   | [google drive](https://drive.google.com/drive/folders/1N8fo1zDtg726DLKp1PH_NF3S3K576mgK?usp=sharing) |
 | target_oracle |  45.70   | [google drive](https://drive.google.com/drive/folders/1N3OdYcQlbBeUeYGBmlMchKRWT2Xj6L6G?usp=sharing) |
 
+pf2front:
+
+|    method     | mAP@0.25 |                                          checkpoints & logs                                          |
+|:-------------:|:--------:|:----------------------------------------------------------------------------------------------------:|
+|  source_only  |  30.42   | [google drive](https://drive.google.com/drive/folders/14fbrUXzUTDK9lM95CsR6ow2W9tgr6hB3?usp=sharing) |
+|   10_shots    |  32.56   | [google drive](https://drive.google.com/drive/folders/1KZPPOLzgyU7TYH8QrXD0g9UluUOw7oxg?usp=sharing) |
+|   100_shots   |  37.01   | [google drive](https://drive.google.com/drive/folders/1_xt6LJ5oLxvZYIArd_O4DocGlKhEuf4f?usp=sharing) |
+|  size_prior   |  28.16   | [google drive](https://drive.google.com/drive/folders/1a5PVNsBUYNOC23rePBIf_rT9hRKcqNPY?usp=sharing) |
+|      vss      |  28.15   | [google drive](https://drive.google.com/drive/folders/1mv4t8wo-5qPbVo5_CkqAR7SmoEIH6z1B?usp=sharing) |
+| mean_teacher  |  32.70   | [google drive](https://drive.google.com/drive/folders/1neUxt8r3Dbto129-pe4bS-m1gzEE0RCQ?usp=sharing) |
+|      rv       |  32.74   | [google drive](https://drive.google.com/drive/folders/1CRWiUaNjZsWufUiPzQMkcHW1GoAXQSFi?usp=sharing) |
+| target_oracle |  79.52   | [google drive](https://drive.google.com/drive/folders/1jw_-8hVf4jPDZGEZ5ZZvp36yc4ZEazaf?usp=sharing) |
+
+proc2pf:
+
+|    method     | mAP@0.25 |                                          checkpoints & logs                                          |
+|:-------------:|:--------:|:----------------------------------------------------------------------------------------------------:|
+|  source_only  |  25.92   | [google drive](https://drive.google.com/drive/folders/1no_dDh4al9sEfNev8_6-E1gjoMlASL3Y?usp=sharing) |
+|   10_shots    |  27.00   | [google drive](https://drive.google.com/drive/folders/1oy0ZPNHzHhsndj-XUW2Q3dqluzhitxRD?usp=sharing) |
+|   100_shots   |  29.23   | [google drive](https://drive.google.com/drive/folders/1YfI7YY4FDaRAdNtLdXzM2OBiP3JRDQpW?usp=sharing) |
+|  size_prior   |  25.98   | [google drive](https://drive.google.com/drive/folders/1OWgMc-XQQSddhHRwzbK1smNRhhxkXL6Z?usp=sharing) |
+|      vss      |  24.32   | [google drive](https://drive.google.com/drive/folders/1tBrQZ--mduioJjIq4-KMJ4bsIdkgGXRX?usp=sharing) |
+| mean_teacher  |  27.44   | [google drive](https://drive.google.com/drive/folders/1JXfWb0XL2SW_HiaUu8JSz8NKt2OMoSkP?usp=sharing) |
+|      rv       |  27.78   | [google drive](https://drive.google.com/drive/folders/1rikvfbkYv0c7wGtJ-A8tTz57bG7z-8aZ?usp=sharing) |
+| target_oracle |  54.68   | [google drive](https://drive.google.com/drive/folders/13gAWkoVpXiKIegSe6Y2Q9dqarniRPB9Z?usp=sharing) |
+
 ## 3. Citation
 
 This repository is based on the following works, we thank the authors for their contributions:
@@ -223,6 +253,9 @@ This repository is based on the following works, we thank the authors for their 
 - [VoteNet](https://github.com/facebookresearch/votenet)
 - [DODA](https://github.com/CVMI-Lab/DODA)
 - [MRT](https://github.com/JeremyZhao1998/MRT-release)
+- [ScanNet](https://github.com/ScanNet/ScanNet)
+- [SUN RGB-D](https://rgbd.cs.princeton.edu/)
+- [3D Front](https://tianchi.aliyun.com/dataset/65347)
 
 This repository is maintained by [Zijing Zhao](https://jeremyzhao1998.github.io/),
 feel free to contact if you have any questions.

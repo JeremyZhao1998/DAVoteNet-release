@@ -1,15 +1,15 @@
-N_GPUS=1
-BATCH_SIZE=32
+N_GPUS=2
+BATCH_SIZE=64
 DATA_ROOT=<your_data_root>
 OUTPUT_DIR=<your_output_dir>/front2sun/size_prior
 
-CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=8 torchrun \
+CUDA_VISIBLE_DEVICES=0,1 OMP_NUM_THREADS=8 torchrun \
 --rdzv_endpoint localhost:27506 \
 --nproc_per_node=${N_GPUS} \
 main.py \
 --mode source_only \
 --data_root ${DATA_ROOT} \
---src_dataset 3dfront_vss \
+--src_dataset 3dfront \
 --tgt_dataset sunrgbd \
 --num_points_preload 100000 \
 --num_points 40000 \

@@ -6,7 +6,7 @@ OUTPUT_DIR=<your_output_dir>/proc2scan/10_shots
 echo "Processing 10-shots annotated target samples fine-tuning"
 
 CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=8 torchrun \
---rdzv_endpoint localhost:28505 \
+--rdzv_endpoint localhost:30505 \
 --nproc_per_node=${N_GPUS} \
 main.py \
 --mode source_only \
@@ -34,7 +34,7 @@ OUTPUT_DIR=<your_output_dir>/proc2scan/100_shots
 echo "Processing 100-shots annotated target samples fine-tuning"
 
 CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=8 torchrun \
---rdzv_endpoint localhost:28505 \
+--rdzv_endpoint localhost:30505 \
 --nproc_per_node=${N_GPUS} \
 main.py \
 --mode source_only \

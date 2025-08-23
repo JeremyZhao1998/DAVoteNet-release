@@ -129,13 +129,13 @@ def convert_data(raw_data_path, output_path, split, max_num_points=20000):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--raw_data_path', type=str, default='/home/zhaozj/Datasets/scannet')
-    parser.add_argument('--output_root', type=str, default='/home/zhaozj/Datasets')
+    parser.add_argument('--raw_data_path', type=str, default='<your_data_root>/scannet')
+    parser.add_argument('--output_root', type=str, default='<your_data_root>/scannet')
     parser.add_argument('--num_points', type=int, default=200000)
     args = parser.parse_args()
     for element in vars(args):
         print(element, ':', getattr(args, element))
-    output = os.path.join(args.output_root, "scannet")
+    output = args.output_root
     if not os.path.exists(output):
         os.mkdir(output)
     convert_data(

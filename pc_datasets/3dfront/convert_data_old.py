@@ -227,14 +227,6 @@ def convert_data(raw_data_path, output_path, split, axis_aligned=False, num_poin
         colors_all = np.concatenate(colors_all, axis=0)
         mean_color += np.mean(colors_all, axis=0)[:3]
         pc_np = np.hstack([points_all, colors_all])[:, :6]
-        """ori_np = np.load('/home/zhaozj/Downloads/density1250/04684207-3d45-4d33-bd9d-0f66c9a45402_MasterBedroom-9404.npy')
-        from utils.visualization import draw_point_cloud
-        draw_point_cloud(pc_np)
-        # draw_point_cloud(ori_np[:, :3])
-        # export_ply(pc_np)
-        print(room_id)
-        print(category_list)
-        exit()"""
         assert len(obj_list) == len(category_list)
         if len(obj_list) < 1 or len(obj_list) > 32:
             print('Skip scene: %s for too few or too many objects (%d objects)' % (scene_id, len(obj_list)))
@@ -263,8 +255,8 @@ def convert_data(raw_data_path, output_path, split, axis_aligned=False, num_poin
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--raw_data_path', type=str, default='/home/zhaozj/Datasets/3dfront')
-    parser.add_argument('--output_root', type=str, default='/home/zhaozj/Datasets/3dfront')
+    parser.add_argument('--raw_data_path', type=str, default='<your_data_root>/3dfront')
+    parser.add_argument('--output_root', type=str, default='<your_data_root>/3dfront')
     parser.add_argument('--num_points', type=int, default=200000)
     parser.add_argument('--axis_aligned', type=int, default=1, help='Use axis aligned boxes.')
     parser.add_argument('--seed', type=int, default=0)

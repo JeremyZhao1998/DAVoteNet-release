@@ -4,7 +4,7 @@ DATA_ROOT=<your_data_root>
 OUTPUT_DIR=<your_output_dir>/scan2sun/rv
 
 CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=8 torchrun \
---rdzv_endpoint localhost:29504 \
+--rdzv_endpoint localhost:31504 \
 --nproc_per_node=${N_GPUS} \
 main.py \
 --mode teaching \

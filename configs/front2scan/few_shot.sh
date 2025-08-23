@@ -1,10 +1,11 @@
 N_GPUS=1
 BATCH_SIZE=32
 DATA_ROOT=<your_data_root>
+
 OUTPUT_DIR=<your_output_dir>/front2scan/10_shots
 echo "Processing 10-shots annotated target samples training"
 
-CUDA_VISIBLE_DEVICES=3 OMP_NUM_THREADS=8 torchrun \
+CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=8 torchrun \
 --rdzv_endpoint localhost:26505 \
 --nproc_per_node=${N_GPUS} \
 main.py \
@@ -32,7 +33,7 @@ main.py \
 OUTPUT_DIR=<your_output_dir>/front2scan/100_shots
 echo "Processing 100-shots annotated target samples training"
 
-CUDA_VISIBLE_DEVICES=3 OMP_NUM_THREADS=8 torchrun \
+CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=8 torchrun \
 --rdzv_endpoint localhost:26505 \
 --nproc_per_node=${N_GPUS} \
 main.py \
