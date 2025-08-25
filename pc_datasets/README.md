@@ -19,10 +19,10 @@ with accurate annotations of objects and their poses for object detection task.
 
 <table>
   <tr>
-    <td><img src="../figures/procthor/01.gif" width="100%"></td>
-    <td><img src="../figures/procthor/02.gif" width="100%"></td>
-    <td><img src="../figures/procthor/03.gif" width="100%"></td>
-    <td><img src="../figures/procthor/04.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/procthor/01.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/procthor/02.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/procthor/03.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/procthor/04.gif" width="100%"></td>
   </tr>
 </table>
 
@@ -33,10 +33,10 @@ to isolate the domain gap of layout and instance for domain adaptation investiga
 
 <table>
   <tr>
-    <td><img src="../figures/procfront/01.gif" width="100%"></td>
-    <td><img src="../figures/procfront/02.gif" width="100%"></td>
-    <td><img src="../figures/procfront/03.gif" width="100%"></td>
-    <td><img src="../figures/procfront/04.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/procfront/01.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/procfront/02.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/procfront/03.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/procfront/04.gif" width="100%"></td>
   </tr>
 </table>
 
@@ -52,10 +52,10 @@ The convertion code of ScanNet dataset is provided at: [scannet](./scannet/READM
 
 <table>
   <tr>
-    <td><img src="../figures/scannet/01.gif" width="100%"></td>
-    <td><img src="../figures/scannet/02.gif" width="100%"></td>
-    <td><img src="../figures/scannet/03.gif" width="100%"></td>
-    <td><img src="../figures/scannet/04.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/scannet/01.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/scannet/02.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/scannet/03.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/scannet/04.gif" width="100%"></td>
   </tr>
 </table>
 
@@ -68,10 +68,10 @@ The convertion code of SUN RGB-D dataset is provided at: [sunrgbd](./sunrgbd/REA
 
 <table>
   <tr>
-    <td><img src="../figures/sunrgbd/01.gif" width="100%"></td>
-    <td><img src="../figures/sunrgbd/02.gif" width="100%"></td>
-    <td><img src="../figures/sunrgbd/03.gif" width="100%"></td>
-    <td><img src="../figures/sunrgbd/04.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/sunrgbd/01.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/sunrgbd/02.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/sunrgbd/03.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/sunrgbd/04.gif" width="100%"></td>
   </tr>
 </table>
 
@@ -85,10 +85,10 @@ The convertion code of 3D Front dataset is provided at: [3dfront](./3dfront/READ
 
 <table>
   <tr>
-    <td><img src="../figures/3dfront/01.gif" width="100%"></td>
-    <td><img src="../figures/3dfront/02.gif" width="100%"></td>
-    <td><img src="../figures/3dfront/03.gif" width="100%"></td>
-    <td><img src="../figures/3dfront/04.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/3dfront/01.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/3dfront/02.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/3dfront/03.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/3dfront/04.gif" width="100%"></td>
   </tr>
 </table>
 

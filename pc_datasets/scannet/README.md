@@ -6,10 +6,10 @@ ScanNet dataset is a high quality real-world dataset collected from 3D scanners.
 
 <table>
   <tr>
-    <td><img src="../../figures/scannet/01.gif" width="100%"></td>
-    <td><img src="../../figures/scannet/02.gif" width="100%"></td>
-    <td><img src="../../figures/scannet/03.gif" width="100%"></td>
-    <td><img src="../../figures/scannet/04.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/scannet/01.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/scannet/02.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/scannet/03.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/scannet/04.gif" width="100%"></td>
   </tr>
 </table>
 

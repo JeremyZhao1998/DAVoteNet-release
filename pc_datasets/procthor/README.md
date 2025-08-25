@@ -8,10 +8,10 @@ with accurate annotations of objects and their poses for object detection task.
 
 <table>
   <tr>
-    <td><img src="../../figures/procthor/01.gif" width="100%"></td>
-    <td><img src="../../figures/procthor/02.gif" width="100%"></td>
-    <td><img src="../../figures/procthor/03.gif" width="100%"></td>
-    <td><img src="../../figures/procthor/04.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/procthor/01.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/procthor/02.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/procthor/03.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/procthor/04.gif" width="100%"></td>
   </tr>
 </table>
 
@@ -22,10 +22,10 @@ to isolate the domain gap of layout and instance for domain adaptation investiga
 
 <table>
   <tr>
-    <td><img src="../../figures/procfront/01.gif" width="100%"></td>
-    <td><img src="../../figures/procfront/02.gif" width="100%"></td>
-    <td><img src="../../figures/procfront/03.gif" width="100%"></td>
-    <td><img src="../../figures/procfront/04.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/procfront/01.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/procfront/02.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/procfront/03.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/procfront/04.gif" width="100%"></td>
   </tr>
 </table>
 

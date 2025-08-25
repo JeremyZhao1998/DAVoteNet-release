@@ -7,10 +7,10 @@ thus exhibiting low quality point clouds with obvious point omissions.
 
 <table>
   <tr>
-    <td><img src="../../figures/sunrgbd/01.gif" width="100%"></td>
-    <td><img src="../../figures/sunrgbd/02.gif" width="100%"></td>
-    <td><img src="../../figures/sunrgbd/03.gif" width="100%"></td>
-    <td><img src="../../figures/sunrgbd/04.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/sunrgbd/01.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/sunrgbd/02.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/sunrgbd/03.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/sunrgbd/04.gif" width="100%"></td>
   </tr>
 </table>
 

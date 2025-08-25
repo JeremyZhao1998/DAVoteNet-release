@@ -10,10 +10,10 @@ The convertion code of 3D Front dataset is provided at: [3dfront](./3dfront/READ
 
 <table>
   <tr>
-    <td><img src="../../figures/3dfront/01.gif" width="100%"></td>
-    <td><img src="../../figures/3dfront/02.gif" width="100%"></td>
-    <td><img src="../../figures/3dfront/03.gif" width="100%"></td>
-    <td><img src="../../figures/3dfront/04.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/3dfront/01.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/3dfront/02.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/3dfront/03.gif" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/JeremyZhao1998/JeremyZhao1998.github.io/master/images/2025-DAVoteNet/3dfront/04.gif" width="100%"></td>
   </tr>
 </table>
 
