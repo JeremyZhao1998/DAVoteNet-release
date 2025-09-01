@@ -260,4 +260,22 @@ This repository is based on the following works, we thank the authors for their 
 This repository is maintained by [Zijing Zhao](https://jeremyzhao1998.github.io/),
 feel free to contact if you have any questions.
 
-The citation bibliography will be updated once the proceedings are published.
+If you find our paper or project useful, please cite our work by the following BibTeX:
+
+```
+@misc{zhao2025investigating,
+  author       = {Zhao, Zijing and Xu, Zhu and Chen, Qingchao and Peng, Yuxin and Liu, Yang},
+  title        = {Investigating Domain Gaps for Indoor {3D} Object Detection},
+  year         = {2025},
+  eprint       = {2508.17439},
+  archivePrefix= {arXiv},
+  primaryClass = {cs.CV},
+  doi          = {10.48550/arXiv.2508.17439},
+  url          = {https://arxiv.org/abs/2508.17439},
+  note         = {Preprint; accepted to ACM MM 2025 (Datasets Track)}
+}
+```
+
+
+Thanks for your attention.
+
